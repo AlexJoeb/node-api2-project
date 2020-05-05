@@ -21,5 +21,5 @@ const PostsRoutes = require('./routes/Posts');
 server.use('/api/posts', PostsRoutes);
 
 // * Initialize server.
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 server.listen(port, () => console.log(`✈ Server has taken flight on port ${port} ✈`));

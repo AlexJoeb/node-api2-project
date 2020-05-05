@@ -9,10 +9,8 @@ const db = require('../data/db');
 router.get('/', (req, res) => {
     return db.find()
         .then((resp) => {
-            console.log(resp);
             return res.status(200).json({ message: `Here is all of the posts.`, data: resp });
         }).catch(error => {
-            console.error(error);
             return res.status(500).json({ message: `The posts information could not be retrieved.` });
         })
 })
@@ -20,7 +18,7 @@ router.get('/', (req, res) => {
 // * -> GET -> `/api/posts/:id` -> Return a singular post by ID.
 router.get(`/:id`, (req, res) => {
     const id = req.params.id;
-    db.findById(id)
+    return db.findById(id)
         .then(resp => {
             if (!resp.length) {
                 // * No such post with given id.
@@ -36,7 +34,7 @@ router.get(`/:id`, (req, res) => {
 // * -> GET -> `/api/posts/:id/comments` -> Return a singular post's comments by ID.
 router.get(`/:id/comments`, (req, res) => {
     const id = parseInt(req.params.id);
-    db.findPostComments(id)
+    return db.findPostComments(id)
         .then(resp => {
             if (!resp.length) {
                 // * No such post with given id.
@@ -55,7 +53,7 @@ router.post('/', (req, res) => {
 
     if (!title || !contents) return res.status(400).json({ message: "Please provide `title` and `contents` for the post." });
 
-    db.insert({ title, contents })
+    return db.insert({ title, contents })
         .then(resp => {
             return res.status(201).json({ message: "Inserted post.", data: resp });
         }).catch(error => {
@@ -70,15 +68,59 @@ router.post('/:id/comments', (req, res) => {
 
     if (!text) return res.status(400).json({ message: "Please provide `text` for the comment." });
 
-    db.insertComment({
+    return db.insertComment({
         text,
         post_id
     })
-    .then(resp => {
-        return res.status(201).json({ message: "Inserted comment into post.", data: resp });
-    }).catch(error => {
-        return res.status(500).json({ message: "Could not insert comment into post." });
-    })
+        .then(resp => {
+            return res.status(201).json({ message: "Inserted comment into post.", data: resp });
+        }).catch(error => {
+            return res.status(500).json({ message: "Could not insert comment into post." });
+        })
+});
+
+// * -> PUT -> `/api/posts/:id` -> Updates the post with the specified `id` using data from the `request body`. Returns the modified document, **NOT the original**. 
+router.put('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    return db.findById(id)
+        .then(resp => {
+            if (!resp.length) return res.status(404).json({ message: "That post does not exist. " });
+
+            db.update(id, {
+                ...req.body,
+            })
+                .then(resp => {
+                    return res.status(200).json({ message: "Successfully updated post.", data: resp });
+                }).catch(error => {
+                    return res.status(500).json({ message: "Was not able to update post.", });
+                })
+        })
+        .catch(error => {
+            return res.status(500).json({ message: "Was not able to find post to update." })
+        })
 })
+
+// * -> DELETE -> `/api/posts/:id` -> Removes the post with the specified id and returns the **deleted post object**.
+router.delete('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    return db.findById(id)
+        .then(resp => {
+            if (!resp.length) return res.status(404).json({ message: "That post does not exist. " });
+
+            db.remove(id)
+                .then(resp => {
+                    return res.status(200).json({ message: `Deleted post #${id}.`, data: resp });
+                })
+                .catch(error => {
+                    return res.status(500).json({ message: "Was not able to find post to delete." })
+                })
+        })
+        .catch(error => {
+            return res.status(500).json({ message: "Was not able to find post to delete." })
+        })
+})
+
 
 module.exports = router;
