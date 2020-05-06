@@ -1,0 +1,28 @@
+.app {
+    height: 100vh;
+    width: 100vw;
+
+    background: #26262B;
+
+    padding: 15px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.title {
+    width: 80%;
+    h1 {
+        font-size: 2rem;
+        margin: 0 0 15px;
+        color:#E8E8E8;
+        font-weight: bold;
+    }
+
+    hr{
+        border: 0;
+        border: 2px solid white;
+    }
+}
+

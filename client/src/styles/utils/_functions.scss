@@ -1,0 +1,22 @@
+@function color($color, $shade: base, $opacity: 1){
+    @if map-has-key($map: $shades, $key: $color){
+        @if map-has-key($map: map-get($shades, $color), $key: $shade){
+            @return rgba(map-get($map: map-get($shades, $color), $key: $shade), $opacity);
+        }
+        @else {
+            @warn "#{$shade} was not found in #{$color}'s color-palette.";
+        }
+    }
+    @else {
+        @warn "#{$color} was not found in the color-palette.";
+    }
+}
+
+@function fs($size: regular){
+    @if map-has-key($map: $font__sizes, $key: $size){
+        @return map-get($map: $font__sizes, $key: $size);
+    }
+    @else {
+        @warn "Could not find #{$size} in the font size map.";
+    }
+}

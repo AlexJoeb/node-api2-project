@@ -1,0 +1,100 @@
+.posts {
+    @include flex($wrap: wrap);
+}
+
+.post {
+    flex-basis: 23%;
+
+    background:#35363A;
+    color: #E8E8E8;
+
+    margin-bottom: 15px;
+    padding: 1%;
+    margin-right: 1%;
+
+    border-radius: 5px;
+
+    &__controls{
+        margin: 15px 0;
+
+        @include flex;
+
+        span{ 
+            margin-right: auto;
+        }
+
+        form {
+            width: 50%;
+            @include flex{
+                justify-content: space-between;
+            }
+
+            input {
+                width: 80%;
+                border: 0;
+                border-radius: 5px;
+                padding: 5px;
+
+                &:active, &:focus {
+                    outline: none;
+                }
+            }
+
+            button {
+                width: 19%;
+                border: 0;
+                border-radius: 5px;
+                padding: 5px;
+                color: #E8E8E8;
+                background: #0080E3;
+
+                &:hover{
+                    cursor: pointer;
+                }
+
+                &:active, &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        svg {
+            width: 15px;
+            height: 15px;
+
+            &:first-of-type {
+                &:hover{
+                    cursor: pointer;
+                }
+                path {
+                    fill: red;
+            
+                }
+            }
+
+            &:last-of-type {
+                margin: 0 10px;
+                path{
+                    fill: #E8E8E8;
+                }
+            }
+        }
+    }
+
+    p {
+        font-size: .8rem;
+    }
+
+    &.page {
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+    }
+}
