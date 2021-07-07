@@ -1,0 +1,92 @@
+// ========================
+// = Font Settings ========
+// ========================
+
+    // == Font Stack ==
+    @import "fonts";
+
+    $font__stack--primary: "Roboto", sans-serif;
+
+    // == Font Weight ==
+
+    $font__weight: (
+        normal: 400,
+        bold: 700,
+    );
+
+    // == Font Size ==
+    $font__sizes: (
+        xsmall: .6rem,
+        small: .8rem,
+        regular: 1rem,
+        large: 1.2rem,
+        xlarge: 1.6rem,
+    );
+    
+// ========================
+// = Color Settings =======
+// ========================
+
+    // == Color Def ==
+    $black: #000;
+    $white: #F4F4F4;
+    $gray: #D3D5D7;
+    $blue: #3C91E6; 
+    $red: #C21807;
+    $green: #9FD356; 
+
+    // == Color Shades ==
+    $shades: (
+        black: (
+            xlight: lighten($black, 15%),
+            light: lighten($black, 10%),
+            base: $black,
+            dark: darken($black, 10%),
+            xdark: darken($black, 15%),
+        ),
+        white: (
+            xlight: lighten($white, 15%),
+            light: lighten($white, 10%),
+            base: $white,
+            dark: darken($white, 10%),
+            xdark: darken($white, 15%),
+        ),
+        gray: (
+            xlight: lighten($gray, 15%),
+            light: lighten($gray, 10%),
+            base: $gray,
+            dark: darken($gray, 10%),
+            xdark: darken($gray, 15%),
+        ),
+        blue: (
+            xlight: lighten($blue, 15%),
+            light: lighten($blue, 10%),
+            base: $blue,
+            dark: darken($blue, 10%),
+            xdark: darken($blue, 15%),
+        ),
+        red: (
+            xlight: lighten($red, 15%),
+            light: lighten($red, 10%),
+            base: $red,
+            dark: darken($red, 10%),
+            xdark: darken($red, 15%),
+        ),
+        green: (
+            xlight: lighten($green, 15%),
+            light: lighten($green, 10%),
+            base: $green,
+            dark: darken($green, 10%),
+            xdark: darken($green, 15%),
+        ),
+    );
+
+// ========================
+// = Break Point Settings =
+// ========================
+
+$break-points: (
+    mobile: 320px,
+    tablet: 768px,
+    desktop: 1024px,
+);
